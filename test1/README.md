@@ -12,7 +12,7 @@
 ```image
 ```
 ### 2. 运行和分析下面两个语句并分析判断哪个语句更优。
-#### (1). 语句1
+#### - 语句1
 * 代码
 ```SQL
 set autotrace on
@@ -27,7 +27,7 @@ GROUP BY d.department_name;
 * 截图
 ```image
 ```
-#### (2). 语句2:
+#### - 语句2:
 * 代码：
 ```SQL
 set autotrace on
