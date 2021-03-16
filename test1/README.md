@@ -18,7 +18,7 @@ and d.department_name in ('IT','Sales')
 GROUP BY d.department_name;
 ```
 * 截图
-![语句1结果](1.png)
+  ![语句1结果](1.png)
 #### 2) 语句2:
 * 代码：
 ```SQL
