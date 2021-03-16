@@ -10,7 +10,7 @@
 ### 2. 运行和分析下面两个语句并分析判断哪个语句更优。
 (1). 语句1
 * 代码
-'''
+```
 set autotrace on
 
 SELECT d.department_name,count(e.job_id)as "部门总人数",
@@ -19,7 +19,7 @@ from hr.departments d,hr.employees e
 where d.department_id = e.department_id
 and d.department_name in ('IT','Sales')
 GROUP BY d.department_name;
-'''
+```
 * 截图
 (2). 语句2:
 * 代码：
