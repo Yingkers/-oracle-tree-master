@@ -11,25 +11,25 @@ Oracle有一个开发者角色resource，可以创建表、过程、触发器等
 3) 最后测试：用新用户new_user连接数据库、创建表，插入数据，创建视图，查询表和视图的数据。
 ```
 # 实验步骤
-## 1. 以system登录到pdborcl，创建角色con_res_view和用户new_cy，并授权和分配空间。
+## 1. 以system登录到pdborcl，创建角色con_cy和用户new_cy，并授权和分配空间。
 * 代码：
 ```SQL
 $ sqlplus system/123@pdborcl
-SQL> CREATE ROLE con_res_view;
+SQL> CREATE ROLE con_cy;
 Role created.
-SQL> GRANT connect,resource,CREATE VIEW TO con_res_view;
+SQL> GRANT connect,resource,CREATE VIEW TO con_cy;
 Grant succeeded.
 SQL> CREATE USER new_cy IDENTIFIED BY 123 DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp;
 User created.
 SQL> ALTER USER new_cy QUOTA 50M ON users;
 User altered.
-SQL> GRANT con_res_view TO new_user;
+SQL> GRANT con_cy TO new_cy;
 Grant succeeded.
 SQL> exit
 ```
 * 截图：   
 ![](1.png)
-## 2. 新用户new_user连接到pdborcl，创建表mytable和视图myview，插入数据，最后将myview的SELECT对象权限授予hr用户。
+## 2. 新用户new_cy连接到pdborcl，创建表mytable和视图myview，插入数据，最后将myview的SELECT对象权限授予hr用户。
 * 代码：
 ```SQL
 $ sqlplus new_cy/123@pdborcl
