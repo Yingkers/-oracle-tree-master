@@ -62,8 +62,10 @@ GROUP BY d.department_name;
 ![设计的语句运行结果](3.png)  
 #### 4) 分析语句
 ```text
-该语句的设计原理是，先在 hr.departments表中找出department_name字段满足('IT','Sales')中任意一个的数据组成一个新表，
-然后在将该新表与hr.employees表通过department_id字段相连接，最后在连接后的表中得出department_name,count(e.job_id)as "部门总人数",
-avg(e.salary)as "平均工资"字段的值。一开始将字段满足某个条件的表组成新表，之后再与其他表进行其他操作，可以减少实际操作的数据量，
+该语句的设计原理是，先在 hr.departments表中找出department_name字段
+满足('IT','Sales')中任意一个的数据组成一个新表，然后在将该新表
+与hr.employees表通过department_id字段相连接，最后在连接后的表中
+得出department_name,count(e.job_id)as "部门总人数",avg(e.salary)as "平均工资"字段的值。
+一开始将字段满足某个条件的表组成新表，之后再与其他表进行其他操作，可以减少实际操作的数据量，
 从而增加语句的运行效率。
 ```
