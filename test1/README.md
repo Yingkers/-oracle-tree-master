@@ -58,7 +58,7 @@ from(
 where d.department_id = e.department_id
 GROUP BY d.department_name;
 ```
-* 截图：
+* 截图：   
 ![设计的语句运行结果](3.png)  
 #### 4) 分析语句
 ```text
