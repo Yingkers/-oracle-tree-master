@@ -60,7 +60,7 @@ GROUP BY d.department_name;
 ```
 * 截图：   
 ![设计的语句运行结果](3.png)  
-#### 4) 分析语句
+#### 2) 分析语句
 ```text
 该语句的设计原理是，先在 hr.departments表中找出department_name字段
 满足('IT','Sales')中任意一个的数据组成一个新表，然后在将该新表
