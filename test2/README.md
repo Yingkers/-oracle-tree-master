@@ -11,7 +11,7 @@ Oracle有一个开发者角色resource，可以创建表、过程、触发器等
 3) 最后测试：用新用户new_user连接数据库、创建表，插入数据，创建视图，查询表和视图的数据。
 ```
 # 实验步骤
-## 1. 以system登录到pdborcl，创建角色con_res_view和用户new_user，并授权和分配空间。
+## 1. 以system登录到pdborcl，创建角色con_res_view和用户new_cy，并授权和分配空间。
 * 代码：
 ```SQL
 $ sqlplus system/123@pdborcl
@@ -19,9 +19,9 @@ SQL> CREATE ROLE con_res_view;
 Role created.
 SQL> GRANT connect,resource,CREATE VIEW TO con_res_view;
 Grant succeeded.
-SQL> CREATE USER new_user IDENTIFIED BY 123 DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp;
+SQL> CREATE USER new_cy IDENTIFIED BY 123 DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp;
 User created.
-SQL> ALTER USER new_user QUOTA 50M ON users;
+SQL> ALTER USER new_cy QUOTA 50M ON users;
 User altered.
 SQL> GRANT con_res_view TO new_user;
 Grant succeeded.
@@ -31,11 +31,41 @@ SQL> exit
 ![](1.png)
 ## 2. 新用户new_user连接到pdborcl，创建表mytable和视图myview，插入数据，最后将myview的SELECT对象权限授予hr用户。
 * 代码：
+```SQL
+$ sqlplus new_cy/123@pdborcl
+SQL> show user;
+USER is "NEW_CY"
+SQL> CREATE TABLE mytable (id number,name varchar(50));
+Table created.
+SQL> INSERT INTO mytable(id,name)VALUES(1,'cheng');
+1 row created.
+SQL> INSERT INTO mytable(id,name)VALUES (2,'du');
+1 row created.
+SQL> CREATE VIEW myview AS SELECT name FROM mytable;
+View created.
+SQL> SELECT * FROM myview;
+NAME
+--------------------------------------------------
+chend
+du
+SQL> GRANT SELECT ON myview TO hr;
+Grant succeeded.
+SQL>exit
+```
 * 截图：   
 ![](2.png)
 ## 3. 用户hr连接到pdborcl，查询new_user授予它的视图myview。
 * 代码：
-* 截图：
+```SQL
+$ sqlplus hr/123@pdborcl
+SQL> SELECT * FROM new_cy.myview;
+NAME
+--------------------------------------------------
+cheng
+du
+SQL> exit
+```
+* 截图：   
 ![](3.png)
 ## 4. 数据库和表空间占用分析。
 ```text
@@ -64,5 +94,5 @@ SQL>SELECT a.tablespace_name "表空间名",Total/1024/1024 "大小MB",
 autoextensible是显示表空间中的数据文件是否自动增加。
 MAX_MB是指数据文件的最大容量。
  ```
-* 截图：
+* 截图：   
 ![](4.png)
