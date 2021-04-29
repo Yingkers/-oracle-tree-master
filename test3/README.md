@@ -20,7 +20,7 @@ alert user new_cy quota unlimited on users03;
 ```  
 ![](1.1.png)  
 ### 2. 用自己的账号new_cy登录,并创建表：orders（订单表）和order_details（订单详表）  
-#### 并创建表：orders（订单表）和order_details（订单详表）
+#### 创建表：orders（订单表）和order_details（订单详表）
 * orders（订单表）
 ```MYSQL
 CREATE TABLE orders 
