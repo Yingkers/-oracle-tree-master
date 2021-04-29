@@ -14,9 +14,9 @@
 ### 1. 在主表orders和从表order_details之间建立引用分区  
 #### 创建自己的账号：new_cy，然后以 system 身份登录:
 ```MYSQL
-alert user new_cy quota unlimited on users;
-alert user new_cy quota unlimited on users02;
-alert user new_cy quota unlimited on users03;
+alter user new_cy quota unlimited on users;
+alter user new_cy quota unlimited on users02;
+alter user new_cy quota unlimited on users03;
 ```  
 ![](1.1.png)  
 ### 2. 用自己的账号new_cy登录,并创建表：orders（订单表）和order_details（订单详表）  
