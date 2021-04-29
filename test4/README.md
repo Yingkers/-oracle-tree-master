@@ -112,16 +112,16 @@ order by level;
 select * from ORDERS where rownum <= 5 ;
 ```
 ![](2.3.png)
-#### 查询订单详表，要求显示订单的客户名称和客户电话、产品类型：
+#### 查询订单详表，要求显示5条订单的客户名称和客户电话、产品类型：
 ```MYSQL
 select o.customer_name as 客户名称,o.customer_tel as 客户电话, p.product_type as 产品类型
 from orders o,order_details d,products p
-where o.order_id = d.order_id and d.product_name = p.product_name;
+where o.order_id = d.order_id and d.product_name = p.product_name and rownum <= 5;
 ```
 ![](2.4.png)
-#### 查询出所有空订单：
+#### 查询出5条空订单：
 ```MYSQL
-select * from ORDERS where ORDER_ID not in(select distinct ORDER_ID from ORDER_DETAILS); 
+select * from ORDERS where ORDER_ID not in(select distinct ORDER_ID from ORDER_DETAILS) and rownum <= 5; 
 ```
 ![](2.5.png)
 #### 查询部门表，同时显示部门的负责人姓名：
