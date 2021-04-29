@@ -11,7 +11,7 @@
 * 写出插入数据的语句和查询数据的语句，并分析语句的执行计划。
 * 进行分区与不分区的对比实验。
 ## 实验步骤
-1. 在主表orders和从表order_details之间建立引用分区
+1. 在主表orders和从表order_details之间建立引用分区  
 创建自己的账号：new_cy，然后以 system 身份登录:
 ```MYSQL
 alert user new_cy quota unlimited on users;
