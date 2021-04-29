@@ -90,7 +90,6 @@ ALTER TABLE orders ADD PARTITION partition_before_2022
 VALUES LESS THAN(TO_DATE('2022-01-01','YYYY-MM-DD'))
 TABLESPACE USERS03;
 ```  
-![](2.1.png)
 * order_details（订单详表）  
 ```MYSQL
 CREATE TABLE order_details 
@@ -110,7 +109,6 @@ STORAGE ( BUFFER_POOL DEFAULT )
 NOCOMPRESS NOPARALLEL
 PARTITION BY REFERENCE (order_details_fk1);
 ```  
-![](2.2.png)  
 #### 插入数据，数据能并平均分布到各个分区
 ```MYSQL
 for i in 1..10000
@@ -165,7 +163,6 @@ for i in 1..10000
   end loop;
 end;
 ```  
-![](2.3.png)
 ### 3. 求出orders（订单表）和order_details（订单详表）数据条数。
 ```MYSQL
 select count(*) from new_cy.orders;
