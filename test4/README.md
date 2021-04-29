@@ -96,7 +96,7 @@ sqlplus new_cy/123@localhost/pdborcl
 ### 2. 查询数据
 #### 查询经理信息：
 ```MYSQL
-SELECT * FROM EMPLOYEES WHERE NAME LIKE '%经理%'
+SELECT * FROM EMPLOYEES WHERE NAME LIKE '%经理%';
 ```
 ![](2.1.png)
 #### 递归查询某个员工及其所有下属，子下属员工：
