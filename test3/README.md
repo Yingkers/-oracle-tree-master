@@ -158,7 +158,7 @@ select count(*) from new_cy.orders;
 select count(*) from new_cy.order_details;
 ```  
 ![](3.1.png)
-4. 查看数据库的使用情况
+4. 查看数据库的使用情况  
 1)查看表空间的数据库文件
 ```MYSQL
 SELECT 
