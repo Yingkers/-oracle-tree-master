@@ -107,9 +107,9 @@ CONNECT BY PRIOR employee_id = manager_id
 order by level;
 ```
 ![](2.2.png)
-#### 查询订单表，并且包括订单的订单应收货款:
+#### 查询订单表前10条数据，并且包括订单的订单应收货款:
 ```MYSQL
-select * from ORDERS;
+select * from ORDERS where rownum <= 10 ;
 ```
 ![](2.3.png)
 #### 查询订单详表，要求显示订单的客户名称和客户电话、产品类型：
