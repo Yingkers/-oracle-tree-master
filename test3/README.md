@@ -18,7 +18,7 @@ alert user new_cy quota unlimited on users;
 alert user new_cy quota unlimited on users02;
 alert user new_cy quota unlimited on users03;
 ```  
-!()[1.1.png]  
+![](1.1.png)  
 2. 用自己的账号new_cy登录,并创建表：orders（订单表）和order_details（订单详表）  
 * orders（订单表）
 ```MYSQL
@@ -75,7 +75,7 @@ ALTER TABLE orders ADD PARTITION partition_before_2022
 VALUES LESS THAN(TO_DATE('2022-01-01','YYYY-MM-DD'))
 TABLESPACE USERS03;
 ```  
-!()[2.1.png]
+![](2.1.png)
 * order_details（订单详表）  
 ```MYSQL
 CREATE TABLE order_details 
@@ -95,7 +95,7 @@ STORAGE ( BUFFER_POOL DEFAULT )
 NOCOMPRESS NOPARALLEL
 PARTITION BY REFERENCE (order_details_fk1);
 ```  
-!()[2.2.png]
+![](2.2.png)
 插入数据，数据能并平均分布到各个分区
 ```MYSQL
 for i in 1..10000
@@ -150,13 +150,13 @@ for i in 1..10000
   end loop;
 end;
 ```  
-!()[2.3.png]
+![](2.3.png)
 3. 求出orders（订单表）和order_details（订单详表）数据条数。
 ```MYSQL
 select count(*) from new_cy.orders;
 select count(*) from new_cy.order_details;
 ```  
-!()[3.1.png]
+![](3.1.png)
 4. 查看数据库的使用情况
 查看表空间的数据库文件
 ```MYSQL
@@ -164,7 +164,7 @@ SELECT
 tablespace_name,FILE_NAME,BYTES/1024/1024 MB,MAXBYTES/1024/1024 MAX_MB,autoextensible FROM dba_data_files
 WHERE  tablespace_name='USERS';
 ```
-!()[4.1.png]  
+![](4.1.png)
 查看每个文件的磁盘占用情况
 ```MYSQL
 SELECT a.tablespace_name "表空间名",Total/1024/1024 "大小MB",
@@ -176,6 +176,6 @@ SELECT a.tablespace_name "表空间名",Total/1024/1024 "大小MB",
         group  BY tablespace_name)b
  where  a.tablespace_name = b.tablespace_name;
  ```  
- !()[4.2.png]
+ ![](4.2.png)
  * autoextensible是显示表空间中的数据文件是否自动增加。
  * MAX_MB是指数据文件的最大容量。
