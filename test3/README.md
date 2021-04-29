@@ -24,6 +24,19 @@ alter user new_cy quota unlimited on users03;
 * orders（订单表）
 ```MYSQL
 sqlplus new_cy/123@localhost/pdborcl
+CREATE TABLESPACE users02 DATAFILE
+  '/home/student/new_cy/pdbtest_users02_1.dbf'
+    SIZE 100M AUTOEXTEND ON NEXT 50M MAXSIZE UNLIMITED，
+  '/home/student/new_cy/pdbtest_users02_2.dbf' 
+    SIZE 100M AUTOEXTEND ON NEXT 50M MAXSIZE UNLIMITED
+  EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+  
+  SQL>CREATE TABLESPACE users03 DATAFILE
+  '/home/student/new_cy/pdbtest_users02_1.dbf'
+    SIZE 100M AUTOEXTEND ON NEXT 50M MAXSIZE UNLIMITED，
+  '/home/student/new_cy/pdbtest_users02_2.dbf'
+    SIZE 100M AUTOEXTEND ON NEXT 50M MAXSIZE UNLIMITED
+  EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
 CREATE TABLE orders 
 (
  order_id NUMBER(10, 0) NOT NULL 
