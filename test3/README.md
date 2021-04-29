@@ -12,7 +12,7 @@
 * 进行分区与不分区的对比实验。
 ## 实验步骤
 1. 在主表orders和从表order_details之间建立引用分区  
-1) 创建自己的账号：new_cy，然后以 system 身份登录:
+1)创建自己的账号：new_cy，然后以 system 身份登录:
 ```MYSQL
 alert user new_cy quota unlimited on users;
 alert user new_cy quota unlimited on users02;
@@ -20,7 +20,7 @@ alert user new_cy quota unlimited on users03;
 ```  
 ![](1.1.png)  
 2. 用自己的账号new_cy登录,并创建表：orders（订单表）和order_details（订单详表）  
-1) 并创建表：orders（订单表）和order_details（订单详表）
+1)并创建表：orders（订单表）和order_details（订单详表）
 * orders（订单表）
 ```MYSQL
 CREATE TABLE orders 
@@ -97,7 +97,7 @@ NOCOMPRESS NOPARALLEL
 PARTITION BY REFERENCE (order_details_fk1);
 ```  
 ![](2.2.png)  
-2) 插入数据，数据能并平均分布到各个分区
+2)插入数据，数据能并平均分布到各个分区
 ```MYSQL
 for i in 1..10000
   loop
@@ -159,14 +159,14 @@ select count(*) from new_cy.order_details;
 ```  
 ![](3.1.png)
 4. 查看数据库的使用情况
-1) 查看表空间的数据库文件
+1)查看表空间的数据库文件
 ```MYSQL
 SELECT 
 tablespace_name,FILE_NAME,BYTES/1024/1024 MB,MAXBYTES/1024/1024 MAX_MB,autoextensible FROM dba_data_files
 WHERE  tablespace_name='USERS';
 ```
 ![](4.1.png)
-2) 查看每个文件的磁盘占用情况
+2)查看每个文件的磁盘占用情况
 ```MYSQL
 SELECT a.tablespace_name "表空间名",Total/1024/1024 "大小MB",
  free/1024/1024 "剩余MB",( total - free )/1024/1024 "使用MB",
