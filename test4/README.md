@@ -35,16 +35,21 @@
 ```
 ### * 表结构：
 * 部门表DEPARTMENTS,表空间：USERS
+
 |编号|字段名|数据类型|可以为空|注释|
 |---|---|---|---|---|
 |1|DEPARTMENT_ID|NUMBER(6,0)|NO|部门ID，主键|
 |2|DEPARTMENT_NAME|VARCHAR2(40 BYTE)|NO|部门名称，非空|
+
 * 产品表PRODUCTS,表空间：USERS
+
 |编号|字段名|数据类型|可以为空|注释|
 |---|---|---|---|---|
 |1|PRODUCT_NAME|VARCHAR2(40 BYTE)|NO|产品名称，产品表的主键|
 |2|PRODUCT_TYPE|VARCHAR2(40 BYTE)|NO|产品类型，只能取值：耗材,手机,电脑|
+
 * 员工表EMPLOYEES,表空间：USERS
+
 |编号|字段名|数据类型|可以为空|注释|
 |---|---|---|---|---|
 |1|EMPLOYEE_ID|NUMBER(6,0)|NO|员工ID，员工表的主键。|
@@ -56,7 +61,9 @@
 |7|MANAGER_ID|NUMBER(6,0)|YES|员工的上司，是员工表EMPOLYEE_ID的外键，MANAGER_ID不能等于EMPLOYEE_ID,即员工的领导不能是自己。主键删除时MANAGER_ID设置为空值。|
 |8|DEPARTMENT_ID|NUMBER(6,0)|YES|员工所在部门，是部门表DEPARTMENTS的外键|
 |9|PHOTO|BLOB|YES|员工照片
+
 * 订单表ORDERS, 表空间：分区表：USERS,USERS02
+
 |编号|字段名|数据类型|可以为空|注释|
 |---|---|---|---|---|
 |1|ORDER_ID|NUMBER(10,0)|NO|订单编号，主键，值来自于序列：SEQ_ORDER_ID|
@@ -66,7 +73,9 @@
 |5|EMPLOYEE_ID|NUMBER(6,0)|NO|订单经手人，员工表EMPLOYEES的外键|
 |6|DISCOUNT|Number(8,2)|YES|订单整体优惠金额。默认值为0|
 |7|TRADE_RECEIVABLE|Number(8,2)|YES|订单应收货款，默认为0，Trade_Receivable= sum(订单详单表.Product_Num*订单详单表.Product_Price)- Discount|
+
 * 订单详单表ORDER_DETAILS, 表空间：分区表：USERS,USERS02，分区参照ORDERS表。
+
 |编号|字段名|数据类型|可以为空|注释|
 |---|---|---|---|---|
 |1|ID|NUMBER(10,0)|NO|本表的主键，值来自于序列：SEQ_ORDER_DETAILS_ID|
@@ -74,5 +83,6 @@
 |4|PRODUCT_NAME|VARCHAR2(40 BYTE)|NO|产品名称, 是产品表PRODUCTS的外键|
 |5|PRODUCT_NUM|NUMBER(8,2)|NO|产品销售数量，必须>0|
 |6|PRODUCT_PRICE|NUMBER(8,2)|NO|产品销售价格|
+
 ### * 数据关系图如下：  
 ![](orders.png)
