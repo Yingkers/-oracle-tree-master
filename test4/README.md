@@ -86,3 +86,61 @@
 
 ### * 数据关系图如下：  
 ![](orders.png)
+## 实验步骤：
+### 1. 登录自己的账号，并运行test4.sql
+```MYSQL
+sqlplus new_cy/123@localhost/pdborcl
+@test4.sql
+```
+![](1.1.png)
+### 2. 查询数据
+#### 查询经理信息：
+```MYSQL
+SELECT * FROM EMPLOYEES WHERE NAME LIKE '%经理%'
+```
+![](2.1.png)
+#### 递归查询某个员工及其所有下属，子下属员工：
+```MYSQL
+SELECT employee_id, name, manager_id, level, CONNECT_BY_ISLEAF  
+FROM EMPLOYEES  START WITH employee_id = 12
+CONNECT BY PRIOR employee_id = manager_id
+order by level;
+```
+![](2.2.png)
+#### 查询订单表，并且包括订单的订单应收货款:
+```MYSQL
+select * from ORDERS;
+```
+![](2.3.png)
+#### 查询订单详表，要求显示订单的客户名称和客户电话、产品类型：
+```MYSQL
+select o.customer_name as 客户名称,o.customer_tel as 客户电话, p.product_type as 产品类型
+from orders o,order_details d,products p
+where o.order_id = d.order_id and d.product_name = p.product_name;
+```
+![](2.4.png)
+#### 查询出所有空订单：
+```MYSQL
+select * from ORDERS where ORDER_ID not in(select distinct ORDER_ID from ORDER_DETAILS); 
+```
+![](2.5.png)
+#### 查询部门表，同时显示部门的负责人姓名：
+```MYSQL
+select d.*, e.NAME 
+from DEPARTMENTS d, EMPLOYEES e,(select  distinct manager_id, department_id from employees where manager_id is not null)t 
+where d.department_id = t.department_id and e.employee_id = t.manager_id;
+```
+![](2.6.png)
+#### 查询部门表，统计每个部门的销售总金额：
+```MYSQL
+select d.department_name,SUM(sum1)
+FROM (
+select (d.product_num*d.product_price) sum1
+from order_details d,orders o,departments d,employees e
+WHERE d.department_id=e.department_id
+and o.employee_id = e.employee_id
+and o.order_id=d.order_id
+),departments d
+group by d.department_name;
+```
+![](2.7.png)
